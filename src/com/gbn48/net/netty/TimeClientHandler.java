@@ -34,6 +34,12 @@ class TimeClientHandler extends ChannelHandlerAdapter {
         buf.readBytes(req);
         String body = new String(req, "UTF-8");
         System.out.println("Now is : " + body);
+
+        System.out.println("send to server again:");
+        byte[] req1 = "QUERY TIME ORDER".getBytes();
+        ByteBuf secondMessage = Unpooled.buffer(req1.length);
+        secondMessage.writeBytes(req1);
+        ctx.writeAndFlush(secondMessage);
     }
 
     @Override
